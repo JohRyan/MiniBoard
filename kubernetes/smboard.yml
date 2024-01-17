@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: smboard
-        image: docker.io/redleon1/smboard_smboard:{{VERSION}}
+        image: docker.io/johbeomju/smboard_smboard:{{VERSION}}
         imagePullPolicy: Always
         ports:
         - containerPort: 8080

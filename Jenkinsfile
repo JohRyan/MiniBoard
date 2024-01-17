@@ -25,23 +25,23 @@ pipeline {
         }
         stage("Docker Image Build") {
            steps {
-               sh "docker build -t redleon1/apache2_smboard:${BUILD_NUMBER} ./docker/apache2/"
-               sh "docker build -t redleon1/smboard_smboard:${BUILD_NUMBER} ./docker/smboard/"
-               sh "docker build -t redleon1/mariadb_smboard:${BUILD_NUMBER} ./docker/mariadb/"
+               sh "docker build -t johbeomju/apache2_smboard:${BUILD_NUMBER} ./docker/apache2/"
+               sh "docker build -t johbeomju/smboard_smboard:${BUILD_NUMBER} ./docker/smboard/"
+               sh "docker build -t johbeomju/mariadb_smboard:${BUILD_NUMBER} ./docker/mariadb/"
            }
         }
         stage("Docker Image Push") {
            steps {
-               sh "docker push redleon1/apache2_smboard:${BUILD_NUMBER}"
-               sh "docker push redleon1/smboard_smboard:${BUILD_NUMBER}" 
-               sh "docker push redleon1/mariadb_smboard:${BUILD_NUMBER}" 
+               sh "docker push johbeomju/apache2_smboard:${BUILD_NUMBER}"
+               sh "docker push johbeomju/smboard_smboard:${BUILD_NUMBER}" 
+               sh "docker push johbeomju/mariadb_smboard:${BUILD_NUMBER}" 
            } 
         }
         stage("Docker Image Clean up") {
            steps {
-               sh "docker image rm redleon1/apache2_smboard:${BUILD_NUMBER}" 
-               sh "docker image rm redleon1/smboard_smboard:${BUILD_NUMBER}" 
-               sh "docker image rm redleon1/mariadb_smboard:${BUILD_NUMBER}" 
+               sh "docker image rm johbeomju/apache2_smboard:${BUILD_NUMBER}" 
+               sh "docker image rm johbeomju/smboard_smboard:${BUILD_NUMBER}" 
+               sh "docker image rm johbeomju/mariadb_smboard:${BUILD_NUMBER}" 
            }
         }
         stage("Minikube start") {
@@ -63,17 +63,17 @@ pipeline {
            post {
                 success {
                     slackSend (
-                        channel: "#it교육",
+                        channel: "#배포",
                         color: "#2C953C",
-                        message: "smboard 배포가 성공하였습니다."
+                        message: "Miniboard 배포가 성공하였습니다."
                     )
                     echo "Completed Server Deploy"
                 }
                 failure {
                     slackSend (
-                        channel: "#it교육",
+                        channel: "#배포",
                         color: "#FF3232",
-                        message: "smboard 배포가 실패하였습니다."
+                        message: "Miniboard 배포가 실패하였습니다."
                     )
                     echo "Fail Server Deploy"
                 }

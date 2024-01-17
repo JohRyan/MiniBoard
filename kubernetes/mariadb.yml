@@ -16,10 +16,10 @@ spec:
       volumes:
       - name: mariadb-data
         hostPath: 
-          path: /home/xavier/volume/mariadb
+          path: /home/ryan/volume/mariadb
       containers:
       - name: mariadb
-        image: docker.io/redleon1/mariadb_smboard:{{VERSION}}
+        image: docker.io/johbeomju/mariadb_smboard:{{VERSION}}
         imagePullPolicy: Always
         volumeMounts:
         - name: mariadb-data
